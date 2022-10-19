@@ -1,7 +1,11 @@
+const DEFAULT_OPTIONS = {
+	debug: false,
+};
+
 export default class jsonToHTML{
 	/*region PRIVATE VARS*/
 	#debug;
-	#jsonStringefied;
+	#jsonStringified;
 	#parsedElements = [];
 	/*endregion*/
 	constructor(options){
@@ -23,11 +27,10 @@ export default class jsonToHTML{
 		let classes = '', word = '', clean_word = '', position = 0,
 			level = '', isFunction = false, comment = '';
 
-		json = JSON.stringify(json);
-		this.#jsonStringefied = json;
+		this.#jsonStringified = JSON.stringify(json);
 
 		for(let i = 0; i<json.length; i++){
-			if((/^[:]+$/i).test(json[i])) {
+			if((/^:+$/i).test(json[i])) {
 				if(word.length > 0) {
 					classes = `jth-property ${level}`;
 					this.#parsedElements.push(`<div class="${classes}">${word}</div>`);
@@ -37,7 +40,7 @@ export default class jsonToHTML{
 				classes = 'jth-operator';
 				if(this.#debug) console.log('operator value set');
 			}
-			if((/^[\{\}\[\]\(\)\.\,\;\\]+$/i).test(json[i])) {
+			if((/^[{}\[\]().,;\\]+$/i).test(json[i])) {
 				if(word.length > 0) {
 					word = word.trimStart();
 					clean_word = word.replace(/"/g, '');
@@ -110,7 +113,7 @@ export default class jsonToHTML{
 					classes = 'jth-punctuator jth-round-bracket';
 				}
 			}
-			if((/^[a-z0-9\-\"\<\>\s\#]+$/i).test(json[i])) {
+			if((/^[a-z0-9\-"<>\s#]+$/i).test(json[i])) {
 				word += json[i];
 				word = word.replace(/</g, '&lt;');
 				word = word.replace(/>/g, '&gt;');

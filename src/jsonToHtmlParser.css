@@ -1,0 +1,153 @@
+pre{
+    overflow: auto;
+}
+
+.jth-punctuator {
+    color: #ccc;
+    margin-left: 1rem;
+    display: inline-block;
+}
+/*round bracket*/
+.jth-punctuator.jth-round-bracket{
+    display: inline-block;
+    margin: 0;
+}
+.jth-punctuator.jth-round-bracket + .jth-punctuator.jth-curly-bracket.jth-opening {
+    margin-left: .2rem;
+}
+/*square bracket*/
+.jth-punctuator.jth-square-bracket{
+    display: inline-block;
+    margin: 0;
+}
+/*curly bracket*/
+.jth-punctuator.jth-level_1.jth-curly-bracket {
+    margin-left: calc(1 * 1rem);
+}
+.jth-punctuator.jth-level_1.jth-curly-bracket.jth-opening {
+    margin-top: 1rem;
+}
+.jth-punctuator.jth-level_1.jth-curly-bracket.jth-closing {
+    margin-bottom: 1rem;
+}
+.jth-punctuator.jth-level_2.jth-curly-bracket {
+    margin-left: calc(2 * 1rem);
+}
+
+.jth-punctuator.jth-dot {
+    margin-left: 0;
+    display: inline-block;
+}
+
+.jth-punctuator.jth-comma {
+    margin-left: .3rem;
+    display: inline-block;
+}
+
+.jth-punctuator.jth-semicolon {
+    margin-left: 0;
+    display: inline-block;
+}
+
+.jth-number {
+    color: #b5f4a5;
+    display: inline-block;
+}
+
+.jth-boolean, .jth-function {
+    color: #93ddfd;
+    display: inline-block;
+}
+
+.jth-function-name, .jth-function-call {
+    color: #6196cc;
+    display: inline-block;
+    margin-left: .3rem;
+}
+.jth-function-call.jth-level_2 {
+    margin-left: calc(2 * 2rem);
+}
+.jth-punctuator.jth-dot + .jth-function-call {
+    margin-left: 0;
+}
+.jth-function-call.jth-level_3 {
+    margin-left: calc(3 * 2rem);
+}
+.jth-function-call.jth-level_4 {
+    margin-left: calc(4 * 2rem);
+}
+.jth-function-call.jth-level_5 {
+    margin-left: calc(5 * 2rem);
+}
+
+.jth-operator, .jth-object, .jth-url {
+    color: #d9a9ff;
+    display: inline-block;
+    margin-right: .5rem;
+}
+.jth-object.jth-level_2 {
+    margin-left: calc(2 * 2rem);
+    margin-right: 0;
+}
+
+.jth-property, .jth-class-name, .jth-constant, .jth-symbol {
+    color: #f8c555;
+    display: inline-block;
+    margin-left: 1rem;
+    margin-bottom: .6rem;
+}
+
+.jth-property.jth-level_1 {
+    margin-left: calc(1 * 2rem);
+}
+.jth-property.jth-level_2 {
+    margin-left: calc(2 * 2rem);
+}
+.jth-property.jth-level_3 {
+    margin-left: calc(3 * 2rem);
+}
+.jth-property.jth-level_4 {
+    margin-left: calc(4 * 2rem);
+}
+.jth-property.jth-level_5 {
+    margin-left: calc(5 * 2rem);
+}
+.jth-punctuator.jth-curly-bracket.jth-closing + .jth-comma + .jth-new-line + .jth-property{
+    margin-top: .4rem;
+}
+
+.jth-string, .jth-char, .jth-attr-value, .jth-regex, .jth-variable {
+    color: #7ec699;
+    display: inline-block;
+}
+
+.jth-entity {
+    cursor: help
+}
+
+.jth-operator + .jth-punctuator.jth-curly-bracket.jth-opening{
+    margin-left: 0;
+}
+
+.jth-new-line {
+    display: block;
+}
+
+.jth-selector, .jth-important, .jth-atrule, .jth-keyword, .jth-builtin {
+    color: #67cdcc;
+}
+.jth-tag, .jth-attr-name, .jth-namespace, .jth-deleted {
+    color: #e2777a
+}
+.jth-comment, .jth-block-comment, .jth-prolog, .jth-doctype, .jth-cdata {
+    color: #9ca3af
+}
+.jth-important, .jth-bold {
+    font-weight: bold
+}
+.jth-inserted {
+    color: green
+}
+.jth-italic {
+    font-style: italic
+}
