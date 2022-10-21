@@ -27,13 +27,14 @@ export default class jsonToHTML{
 		let classes = '', word = '', clean_word = '', position = 0,
 			level = '', isFunction = false, comment = '';
 
-		this.#jsonStringified = JSON.stringify(json);
+		json = JSON.stringify(json);
+		this.#jsonStringified = json;
 
 		for(let i = 0; i<json.length; i++){
 			if((/^:+$/i).test(json[i])) {
 				if(word.length > 0) {
 					classes = `jth-property ${level}`;
-					this.#parsedElements.push(`<div class="${classes}">${word}</div>`);
+					this.#parsedElements.push(`<span class="${classes}">${word}</span>`);
 					if(this.#debug) console.log('property value set');
 				}
 				word = '';
@@ -50,12 +51,12 @@ export default class jsonToHTML{
 					}
 					else if(!isNaN(clean_word) && clean_word.length > 0){
 						classes = 'jth-number';
-						this.#parsedElements.push(`<div class="${classes}">${clean_word}</div>`);
+						this.#parsedElements.push(`<span class="${classes}">${clean_word}</span>`);
 						if(this.#debug) console.log('number value set');
 					}
 					else if(clean_word === 'true' || clean_word === 'false'){
 						classes = 'jth-boolean';
-						this.#parsedElements.push(`<div class="${classes}">${clean_word}</div>`);
+						this.#parsedElements.push(`<span class="${classes}">${clean_word}</span>`);
 						if(this.#debug) console.log('boolean value set');
 					}
 					else if(clean_word.includes('function')){
@@ -64,21 +65,21 @@ export default class jsonToHTML{
 						if(data.length === 2){
 							isFunction = true;
 							classes = 'jth-function';
-							this.#parsedElements.push(`<div class="${classes}">${data[0]}</div>`);
+							this.#parsedElements.push(`<span class="${classes}">${data[0]}</span>`);
 							classes = 'jth-function-name';
-							this.#parsedElements.push(`<div class="${classes}">${data[1]}</div>`);
+							this.#parsedElements.push(`<span class="${classes}">${data[1]}</span>`);
 							if(this.#debug) console.log('function value set');
 						}
 					}
 					else{
 						if(json[i] === '.'){
 							classes = `jth-object ${level}`;
-							this.#parsedElements.push(`<div class="${classes}">${clean_word}</div>`);
+							this.#parsedElements.push(`<span class="${classes}">${clean_word}</span>`);
 							if(this.#debug) console.log('object value set');
 						}
 						else if(json[i] === '('){
 							classes = `jth-function-call ${level}`;
-							this.#parsedElements.push(`<div class="${classes}">${clean_word}</div>`);
+							this.#parsedElements.push(`<span class="${classes}">${clean_word}</span>`);
 							if(this.#debug) console.log('function-call value set');
 						}
 						else if(json[i] === '}' && isFunction && clean_word.length === 0){
@@ -86,7 +87,7 @@ export default class jsonToHTML{
 						}
 						else {
 							classes = 'jth-string';
-							this.#parsedElements.push(`<div class="${classes}">'${clean_word}'</div>`);
+							this.#parsedElements.push(`<span class="${classes}">'${clean_word}'</span>`);
 							if(this.#debug) console.log('string value set');
 						}
 					}
@@ -100,35 +101,35 @@ export default class jsonToHTML{
 				if(json[i] === ';') classes += ' jth-semicolon';
 				if(json[i] === '{') {
 					++position;
-					level = `jth-level_${position}`;
+					level = `jth-lvl_${position}`;
 					classes += ` ${level} jth-curly-bracket jth-opening`;
 				}
 				if(json[i] === '}') {
 					classes += ` ${level} jth-curly-bracket jth-closing`;
 					--position;
-					level = `jth-level_${position}`;
-					this.#parsedElements.push(`<div class="jth-new-line"></div>`);
+					level = `jth-lvl_${position}`;
+					this.#parsedElements.push(`<span class="jth-new-line"></span>`);
 				}
 				if(json[i] === '(' || json[i] === ')'){
 					classes = 'jth-punctuator jth-round-bracket';
 				}
 			}
-			if((/^[a-z0-9\-"<>\s#]+$/i).test(json[i])) {
+			if((/^[a-z0-9\-"<>_\s#]+$/i).test(json[i])) {
 				word += json[i];
 				word = word.replace(/</g, '&lt;');
 				word = word.replace(/>/g, '&gt;');
 				word = word.replace(`""`, `"`);
 			}
 			if(word.length === 0) {
-				this.#parsedElements.push(`<div class="${classes}">${json[i]}</div>`);
+				this.#parsedElements.push(`<span class="${classes}">${json[i]}</span>`);
 				if(this.#debug) console.log('punctuator value set');
 				if(json[i] === '{' || json[i] === ',') {
-					this.#parsedElements.push(`<div class="jth-new-line"></div>`);
+					this.#parsedElements.push(`<span class="jth-new-line"></span>`);
 					if(this.#debug) console.log('new_line value set');
 				}
 
 				if(json[i] === ';'){
-					this.#parsedElements.push(`<div class="jth-new-line"></div>`);
+					this.#parsedElements.push(`<span class="jth-new-line"></span>`);
 					if(this.#debug) console.log('new_line value set');
 				}
 			}
@@ -145,7 +146,7 @@ export default class jsonToHTML{
 	parsedElements(){
 		return this.#parsedElements;
 	}
-	isDebuging(){
+	isDebugging(){
 		return this.#debug;
 	}
 	/*endregion*/
