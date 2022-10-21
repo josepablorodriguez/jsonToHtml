@@ -1,5 +1,5 @@
 # JSON to HTML Parser
-JSON to HTML Parser is a light-weight library to present a JSON object as you see it un your IDE or console.log() in an HTML element.
+JSON to HTML Parser is a light-weight library to present a JSON object as you see it un your IDE or console.log() in an HTML element. It is **still under development**, but feel free to explore.
 
 ## Installation
 You can currently fork the library, clone it, or download it.
